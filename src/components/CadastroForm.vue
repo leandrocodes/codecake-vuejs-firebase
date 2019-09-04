@@ -1,46 +1,40 @@
 <template>
     <div class="cadastroForm">
         <section>
-            <b-field label="Nome Completo:" :label-position="labelPosition">
-                <b-input icon="account" placeholder="Nome Sobrenome"></b-input>
-            </b-field>
+            <v-form v-model="valid">
+                <v-container>
+                    <v-row>
+                        <v-col cols="12" md="4">
+                            <v-text-field
+                                v-model="firstname"
+                                :rules="nameRules"
+                                :counter="10"
+                                label="First name"
+                                required
+                            ></v-text-field>
+                        </v-col>
 
-            <b-field
-                label="Email:"
-                :type="objEmail.tipo"
-                :message="objEmail.mensagem"
-                :label-position="labelPosition"
-            >
-                <b-input icon="email" type="email" placeholder="nome@email.com" maxlength="30"></b-input>
-            </b-field>
+                        <v-col cols="12" md="4">
+                            <v-text-field
+                                v-model="lastname"
+                                :rules="nameRules"
+                                :counter="10"
+                                label="Last name"
+                                required
+                            ></v-text-field>
+                        </v-col>
 
-            <b-field
-                label="Senha"
-                :type="objSenha.tipo"
-                :message="objSenha.mensagem"
-                :label-position="labelPosition"
-            >
-                <b-input
-                    icon="lock"
-                    placeholder="Digite uma senha forte!"
-                    type="password"
-                    maxlength="30"
-                ></b-input>
-            </b-field>
-
-            <b-field
-                label="Senha"
-                :type="objSenha.tipo"
-                :message="objSenha.mensagem"
-                :label-position="labelPosition"
-            >
-                <b-input
-                    icon="lock"
-                    placeholder="Digite a sua senha novamente"
-                    type="password"
-                    maxlength="30"
-                ></b-input>
-            </b-field>
+                        <v-col cols="12" md="4">
+                            <v-text-field
+                                v-model="email"
+                                :rules="emailRules"
+                                label="E-mail"
+                                required
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-form>
         </section>
     </div>
 </template>
@@ -49,19 +43,22 @@
 export default {
     data() {
         return {
-            labelPosition: "on-border",
-            objEmail: {
+            valid: false,
+            user: {
+                firstname: "",
+                lastname: "",
                 email: "",
-                mensagem: "",
-                tipo: ""
+                password: ""
             },
-            objSenha: {
-                senha: "",
-                mensagem: "",
-                tipo: ""
-            },
-            objNome: {
-                tipo: ""
+            userRules: {
+                nameRules: [
+                    v => !!v || "Name is required",
+                    v => v.length <= 10 || "Name must be less than 10 characters"
+                ],
+                emailRules: [
+                    v => !!v || "Name is required",
+                    v => v.length <= 10 || "Name must be less than 10 characters"
+                ]
             }
         }
     }
@@ -69,12 +66,9 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
+<style scoped>
 .cadastroForm {
     width: 30%;
     margin: 0 auto;
-}
-b-field {
-    float: left;
 }
 </style>
