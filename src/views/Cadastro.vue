@@ -1,5 +1,16 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <cadastro-form></cadastro-form>
 </template>
+
+<script>
+import CadastroForm from '../components/CadastroForm'
+export default {
+  components:{
+    CadastroForm
+  }
+}
+</script>
+
+<style>
+
+</style>
