@@ -2,11 +2,16 @@
     <div class="cadastroForm">
         <section>
             <b-field label="Nome Completo:" :label-position="labelPosition">
-                <b-input placeholder="Nome Sobrenome"></b-input>
+                <b-input icon="account" placeholder="Nome Sobrenome"></b-input>
             </b-field>
 
-            <b-field label="Email:" :type="objEmail.tipo" :message="objEmail.mensagem" :label-position="labelPosition">
-                <b-input type="email" placeholder="nome@email.com" maxlength="30"></b-input>
+            <b-field
+                label="Email:"
+                :type="objEmail.tipo"
+                :message="objEmail.mensagem"
+                :label-position="labelPosition"
+            >
+                <b-input icon="email" type="email" placeholder="nome@email.com" maxlength="30"></b-input>
             </b-field>
 
             <b-field
@@ -15,7 +20,12 @@
                 :message="objSenha.mensagem"
                 :label-position="labelPosition"
             >
-                <b-input placeholder="Digite uma senha forte!" type="password" maxlength="30"></b-input>
+                <b-input
+                    icon="lock"
+                    placeholder="Digite uma senha forte!"
+                    type="password"
+                    maxlength="30"
+                ></b-input>
             </b-field>
 
             <b-field
@@ -24,7 +34,12 @@
                 :message="objSenha.mensagem"
                 :label-position="labelPosition"
             >
-                <b-input placeholder="Digite a sua senha novamente" type="password" maxlength="30"></b-input>
+                <b-input
+                    icon="lock"
+                    placeholder="Digite a sua senha novamente"
+                    type="password"
+                    maxlength="30"
+                ></b-input>
             </b-field>
         </section>
     </div>
