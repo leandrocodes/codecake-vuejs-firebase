@@ -4,31 +4,54 @@
             <v-form v-model="valid">
                 <v-container>
                     <v-row>
-                        <v-col cols="12" md="4">
+                        <v-col cols="6" md="6">
                             <v-text-field
-                                v-model="firstname"
-                                :rules="nameRules"
+                                v-model="user.firstname"
+                                :rules="userRules.nameRules"
                                 :counter="10"
-                                label="First name"
+                                label="Nome"
                                 required
                             ></v-text-field>
                         </v-col>
-
-                        <v-col cols="12" md="4">
+                        <v-col cols="6" md="6">
                             <v-text-field
-                                v-model="lastname"
-                                :rules="nameRules"
+                                v-model="user.lastname"
+                                :rules="userRules.nameRules"
                                 :counter="10"
-                                label="Last name"
+                                label="Sobrenome"
                                 required
                             ></v-text-field>
                         </v-col>
-
-                        <v-col cols="12" md="4">
+                    </v-row>
+                    <v-row>
+                        <v-col cols="12">
                             <v-text-field
-                                v-model="email"
-                                :rules="emailRules"
-                                label="E-mail"
+                                v-model="user.email"
+                                :rules="userRules.emailRules"
+                                label="Email"
+                                required
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col cols="12">
+                            <v-text-field
+                                type="password"
+                                v-model="user.password"
+                                :rules="[userRules.passRules.required, userRules.passRules.min]"
+                                label="Senha"
+                                required
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+
+                    <v-row>
+                        <v-col cols="12" md="12">
+                            <v-text-field
+                                v-model="user.firstname"
+                                :rules="userRules.nameRules"
+                                :counter="10"
+                                label="Nome"
                                 required
                             ></v-text-field>
                         </v-col>
@@ -53,12 +76,17 @@ export default {
             userRules: {
                 nameRules: [
                     v => !!v || "Name is required",
-                    v => v.length <= 10 || "Name must be less than 10 characters"
+                    v =>
+                        v.length <= 10 || "Name must be less than 10 characters"
                 ],
                 emailRules: [
-                    v => !!v || "Name is required",
-                    v => v.length <= 10 || "Name must be less than 10 characters"
-                ]
+                    v => !!v || "E-mail is required",
+                    v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+                ],
+                passRules: {
+                    required: value => !!value || "Required.",
+                    min: v => v.length >= 8 || "Min 8 characters"
+                }
             }
         }
     }
