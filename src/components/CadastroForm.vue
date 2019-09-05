@@ -98,15 +98,10 @@ export default {
     },
     methods: {
         register() {
-            firebase
-                .auth()
-                .createUserWithEmailAndPassword(this.email, this.password)
+            this.$firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
                 .catch(function(error) {
-                    // Handle Errors here.
-                    var errorCode = error.code
-                    var errorMessage = error.message
-                    // ...
                 })
+            console.log(this.picker)
         }
     }
 }
