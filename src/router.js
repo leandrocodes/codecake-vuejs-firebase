@@ -11,10 +11,5 @@ export default new Router({
       name: 'login',
       component: Login
     },
-    {
-      path: '/cadastro',
-      name: 'cadastro',
-      component: () => import(/* webpackChunkName: "about" */ './views/Cadastro.vue')
-    }
   ]
 })
