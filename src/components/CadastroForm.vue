@@ -51,11 +51,16 @@
                             ></v-text-field>
                         </v-col>
                     </v-row>
-                    <br>
+                    <br />
                     <h3>Indique a data do seu casamento</h3>
-                    <br>
+                    <br />
                     <v-row justify="center">
                         <v-date-picker color="pink lighten-3" v-model="picker"></v-date-picker>
+                    </v-row>
+                    <v-row justify="end">
+                        <v-col cols="12" md="4">
+                            <v-btn @click="register">Cadastrar</v-btn>
+                        </v-col>
                     </v-row>
                 </v-container>
             </v-form>
@@ -64,6 +69,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 export default {
     data() {
         return {
@@ -88,6 +94,19 @@ export default {
                     "The email and password you entered don't match"
             },
             picker: new Date().toISOString().substr(0, 10)
+        }
+    },
+    methods: {
+        register() {
+            firebase
+                .auth()
+                .createUserWithEmailAndPassword(this.email, this.password)
+                .catch(function(error) {
+                    // Handle Errors here.
+                    var errorCode = error.code
+                    var errorMessage = error.message
+                    // ...
+                })
         }
     }
 }
