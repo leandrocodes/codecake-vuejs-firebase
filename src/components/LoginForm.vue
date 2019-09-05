@@ -7,7 +7,8 @@
                     size="large"
                     icon="account_circle"
                     label-placeholder="E-mail"
-                    v-model="value7"
+                    v-model="email"
+                    :color="tipo"
                 />
             </vs-col>
         </vs-row>
@@ -18,21 +19,38 @@
                     size="large"
                     icon="lock"
                     label-placeholder="Senha"
-                    v-model="value7"
+                    v-model="senha"
+                    :color="tipo"
                 />
             </vs-col>
         </vs-row>
         <vs-row>
             <vs-col vs-offset="3" vs-type="flex" vs-justify="center" vs-align="center" vs-w="6">
               <vs-button color="#9490C0" type="flat">Cadastrar</vs-button>
-              <vs-button color="#C893AA" gradient-color-secondary="#9490C0" type="gradient">Login</vs-button>
+              <vs-button @click="login" color="#C893AA" gradient-color-secondary="#9490C0" type="gradient">Login</vs-button>
             </vs-col>
         </vs-row>
     </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      tipo: '#E79EBD',
+      email: '',
+      senha: ''
+    }
+  },
+  methods: {
+    login() {
+      this.$firebase.auth().signInWithEmailAndPassword(this.email, this.senha)
+        .then( ()=>{
+          this.$router.replace('home')
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>
