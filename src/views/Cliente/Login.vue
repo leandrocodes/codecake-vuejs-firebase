@@ -72,7 +72,7 @@ export default {
                 .signInWithEmailAndPassword(this.email, this.senha)
                 .then(
                     () => {
-                        this.$router.replace('home')
+                        this.$router.replace({name: 'home'})
                     },
                     err => {
                         alert('Oops. ' + err.message)
