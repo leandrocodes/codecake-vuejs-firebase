@@ -46,7 +46,7 @@
                     <vs-button color="#9490C0" type="flat">Cadastrar</vs-button>
                 </router-link>
                 <vs-button
-                    @click="login"
+                    @click.prevent="login"
                     color="#C893AA"
                     gradient-color-secondary="#9490C0"
                     type="gradient"
@@ -67,12 +67,20 @@ export default {
     },
     methods: {
         login() {
-            this.$firebase
+            const res = this.$firebase
                 .auth()
                 .signInWithEmailAndPassword(this.email, this.senha)
-                .then(() => {
-                    this.$router.replace('home')
-                })
+                .then(
+                    () => {
+                        this.$router.replace('home')
+                    },
+                    err => {
+                        alert('Oops. ' + err.message)
+                    }
+                )
+            /*  window.uid = res.user.uid */
+            /* console.log(res.user.uid) */
+            /* this.$router.push({name: 'home'}) */
         }
     }
 }

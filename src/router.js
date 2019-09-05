@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Cliente/Login.vue'
 import Home from './views/Cliente/Home.vue'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 Vue.use(Router)
 
@@ -16,20 +18,20 @@ const router = new Router({
       path: '/home',
       name: 'home',
       component: Home,
-      meta: { requiresAuth: true }
+      meta: {requiresAuth: true}
     },
   ]
 })
 
 
+
 router.beforeEach((to, from, next) => {
-  document.title = `${to.meta.title} - Expenses`
+  const currentUser = firebase.auth().currentUser;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
-  if (!window.uid && to.name !== 'login') {
-    next({ name: 'login' })
-  } else {
-    next()
-  }
-})
+  if (requiresAuth && !currentUser) next('login');
+  else if (!requiresAuth && currentUser) next('home');
+  else next();
+});
 
-export default router
+export default router;
