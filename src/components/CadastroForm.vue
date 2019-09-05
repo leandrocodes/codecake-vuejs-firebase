@@ -35,7 +35,7 @@
                             ></v-text-field>
                         </v-col>
                     </v-row>
-                    
+
                     <v-row>
                         <v-col cols="12" md="12">
                             <v-text-field
@@ -50,6 +50,12 @@
                                 @click:append="show = !show"
                             ></v-text-field>
                         </v-col>
+                    </v-row>
+                    <br>
+                    <h3>Indique a data do seu casamento</h3>
+                    <br>
+                    <v-row justify="center">
+                        <v-date-picker color="pink lighten-3" v-model="picker"></v-date-picker>
                     </v-row>
                 </v-container>
             </v-form>
@@ -80,7 +86,8 @@ export default {
                 min: v => v.length >= 8 || "Min 8 characters",
                 emailMatch: () =>
                     "The email and password you entered don't match"
-            }
+            },
+            picker: new Date().toISOString().substr(0, 10)
         }
     }
 }
