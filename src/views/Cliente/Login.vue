@@ -2,11 +2,10 @@
     <div class="loginForm">
         <vs-row>
             <vs-col
-                vs-offset="2"
-                vs-type="flex"
+                 vs-type="flex"
                 vs-justify="center"
                 vs-align="center"
-                vs-w="8"
+                vs-w="12"
                 vs-xs="12"
                 vs-xs-offset="0"
             >
@@ -22,13 +21,10 @@
         </vs-row>
         <vs-row>
             <vs-col
-                vs-offset="2"
                 vs-type="flex"
                 vs-justify="center"
                 vs-align="center"
-                vs-w="8"
-                vs-xs="12"
-                vs-xs-offset="0"
+                vs-w="12"
             >
                 <vs-input
                     icon-no-border
@@ -37,18 +33,19 @@
                     label-placeholder="Senha"
                     v-model="senha"
                     :color="tipo"
+                    type="password"
                 />
             </vs-col>
         </vs-row>
         <vs-row>
-            <vs-col vs-offset="3" vs-type="flex" vs-justify="center" vs-align="center" vs-w="6">
+            <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
                 <router-link to="/cadastro">
                     <vs-button color="#9490C0" type="flat">Cadastrar</vs-button>
                 </router-link>
                 <vs-button
                     @click.prevent="login"
-                    color="#C893AA"
-                    gradient-color-secondary="#9490C0"
+                    color="#b39cd0"
+                    gradient-color-secondary="#845EC2"
                     type="gradient"
                 >Login</vs-button>
             </vs-col>
@@ -67,32 +64,35 @@ export default {
     },
     methods: {
         login() {
-            const res = this.$firebase
+            this.$firebase
                 .auth()
                 .signInWithEmailAndPassword(this.email, this.senha)
                 .then(
                     () => {
-                        this.$router.replace({name: 'home'})
+                        this.$router.replace({ name: 'home' })
                     },
                     err => {
                         alert('Oops. ' + err.message)
                     }
                 )
-            /*  window.uid = res.user.uid */
-            /* console.log(res.user.uid) */
-            /* this.$router.push({name: 'home'}) */
         }
     }
 }
 </script>
 
 <style scoped>
-.login-form {
-    padding: 10em;
+.loginForm {
+    padding: 10em 3em;
+    height: 30%;
+    width: 40%;
+    background: #fafafa;
+    margin: 0 auto;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 .vs-input {
     margin: 10px;
-    width: 70%;
+    width: 65%;
 }
 .vs-button {
     margin: 25px 70px;
