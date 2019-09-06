@@ -7,8 +7,8 @@
                 vs-align="center"
                 vs-w="12"
                 vs-xs="12"
-                vs-xs-offset="0">
-                
+                vs-xs-offset="0"
+            >
                 <vs-input
                     :danger="danger"
                     :danger-text="dangerText"
@@ -22,12 +22,7 @@
             </vs-col>
         </vs-row>
         <vs-row>
-            <vs-col
-                vs-type="flex"
-                vs-justify="center"
-                vs-align="center"
-                vs-w="12"
-            >
+            <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
                 <vs-input
                     :danger="dangerPass"
                     :danger-text="dangerTextPass"
@@ -43,15 +38,30 @@
         </vs-row>
         <vs-row>
             <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
-                <router-link to="/signup">
-                    <vs-button color="#9490C0" type="flat">Cadastrar</vs-button>
+                <vs-input
+                    :danger="dangerPass"
+                    :danger-text="dangerTextPass"
+                    icon-no-border
+                    size="large"
+                    icon="lock"
+                    label-placeholder="Confirmar senha"
+                    v-model="senha"
+                    :color="tipo"
+                    type="password"
+                />
+            </vs-col>
+        </vs-row>
+        <vs-row>
+            <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
+                <router-link to="/login">
+                    <vs-button color="#9490C0" type="flat">Login</vs-button>
                 </router-link>
                 <vs-button
-                    @click.prevent="login"
+                    @click.prevent="cadastrar"
                     color="#b39cd0"
                     gradient-color-secondary="#845EC2"
                     type="gradient"
-                >Login</vs-button>
+                >Cadastrar</vs-button>
             </vs-col>
         </vs-row>
     </div>
@@ -64,41 +74,10 @@ export default {
             tipo: '#E79EBD',
             email: '',
             senha: '',
-            danger: false,
-            dangerPass: false,
-            dangerText: '',
-            dangerTextPass: '',
+            confirmarSenha: ''
         }
     },
-    methods: {
-        login() {
-            this.$firebase
-                .auth()
-                .signInWithEmailAndPassword(this.email, this.senha)
-                .then(
-                    () => {
-                        this.$router.replace({ name: 'home' })
-                    },
-                    (err) => {
-                        console.log(err.message)
-                        if(err.message == 'The email address is badly formatted.'){
-                            this.danger = true
-                            if(this.email === '')
-                                this.dangerText = 'É obrigatório preencher este campo'
-                            else
-                                this.dangerText = 'Email mal preenchido'
-                        }
-                        if(err.message == 'The password is invalid or the user does not have a password.'){
-                            this.dangerPass = true
-                            if(this.senha === '')
-                                this.dangerTextPass = 'É obrigatório preencher este campo'
-                            else
-                                this.dangerTextPass = 'Senha não corresponde ao email'
-                        }
-                    }
-                )
-        }
-    }
+    methods: {}
 }
 </script>
 

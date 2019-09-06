@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Cliente/Login.vue'
 import Home from './views/Cliente/Home.vue'
+import SignUp from './views/Cliente/SignUp.vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
@@ -21,6 +22,11 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignUp
     },
     {
       path: '/home',
