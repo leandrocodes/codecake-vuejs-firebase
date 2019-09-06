@@ -10,6 +10,8 @@
                 vs-xs-offset="0"
             >
                 <vs-input
+                    :danger="danger"
+                    :danger-text="dangerText"
                     icon-no-border
                     size="large"
                     icon="account_circle"
@@ -59,7 +61,9 @@ export default {
         return {
             tipo: '#E79EBD',
             email: '',
-            senha: ''
+            senha: '',
+            danger: false,
+            dangerText: ''
         }
     },
     methods: {
@@ -72,7 +76,10 @@ export default {
                         this.$router.replace({ name: 'home' })
                     },
                     err => {
-                        alert('Oops. ' + err.message)
+                        if(err.message == 'Email is baddly formatted'){
+                            this.danger = true
+                            this.dangerText = 'Email mal formatado'
+                        }
                     }
                 )
         }
