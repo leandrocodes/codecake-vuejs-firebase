@@ -45,7 +45,7 @@
                     size="large"
                     icon="lock"
                     label-placeholder="Confirmar senha"
-                    v-model="senha"
+                    v-model="confirmarSenha"
                     :color="tipo"
                     type="password"
                 />
@@ -74,10 +74,26 @@ export default {
             tipo: '#E79EBD',
             email: '',
             senha: '',
-            confirmarSenha: ''
+            confirmarSenha: '',
+            danger: false,
+            dangerPass: false,
+            dangerText: '',
+            dangerTextPass: '' 
         }
     },
-    methods: {}
+    methods: {
+        cadastrar() {
+            this.$firebase
+                .auth()
+                .createUserWithEmailAndPassword(this.email, this.senha)
+        }
+    },
+    watch: {
+        confirmarSenha: function() {
+            if (this.senha !== this.confirmarSenha)
+                console.log('senhas diferentes')
+        }
+    }
 }
 </script>
 
