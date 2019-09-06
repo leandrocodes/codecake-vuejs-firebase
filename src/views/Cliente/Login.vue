@@ -29,6 +29,8 @@
                 vs-w="12"
             >
                 <vs-input
+                    :danger="dangerPass"
+                    :danger-text="dangerTextPass"
                     icon-no-border
                     size="large"
                     icon="lock"
@@ -63,7 +65,9 @@ export default {
             email: '',
             senha: '',
             danger: false,
-            dangerText: ''
+            dangerPass: false,
+            dangerText: '',
+            dangerTextPass: '',
         }
     },
     methods: {
@@ -75,10 +79,21 @@ export default {
                     () => {
                         this.$router.replace({ name: 'home' })
                     },
-                    err => {
-                        if(err.message == 'Email is baddly formatted'){
+                    (err) => {
+                        console.log(err.message)
+                        if(err.message == 'The email address is badly formatted.'){
                             this.danger = true
-                            this.dangerText = 'Email mal formatado'
+                            if(this.email === '')
+                                this.dangerText = 'É obrigatório preencher este campo'
+                            else
+                                this.dangerText = 'Email mal preenchido'
+                        }
+                        if(err.message == 'The password is invalid or the user does not have a password.'){
+                            this.dangerPass = true
+                            if(this.senha === '')
+                                this.dangerTextPass = 'É obrigatório preencher este campo'
+                            else
+                                this.dangerTextPass = 'Senha não corresponde ao email'
                         }
                     }
                 )
@@ -90,12 +105,11 @@ export default {
 <style scoped>
 .loginForm {
     padding: 10em 3em;
-    height: 30%;
-    width: 40%;
+    height: 550px;
+    width: 550px;
     background: #fafafa;
-    margin: 0 auto;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    margin: 1em auto;
+    border-radius: 50%;
 }
 .vs-input {
     margin: 10px;
