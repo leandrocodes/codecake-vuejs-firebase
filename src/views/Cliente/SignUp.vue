@@ -24,8 +24,6 @@
         <vs-row>
             <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
                 <vs-input
-                    :danger="dangerPass"
-                    :danger-text="dangerTextPass"
                     icon-no-border
                     size="large"
                     icon="lock"
@@ -91,7 +89,8 @@ export default {
     watch: {
         confirmarSenha: function() {
             if (this.senha !== this.confirmarSenha)
-                console.log('senhas diferentes')
+                this.dangerPass = true
+                this.dangerTextPass = 'Senhas diferentes'
         }
     }
 }
