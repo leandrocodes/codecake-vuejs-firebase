@@ -1,19 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from './views/Cliente/Login.vue'
+//import Login from './views/Cliente/Login.vue'
 import Home from './views/Cliente/Home.vue'
-import SignUp from './views/Cliente/SignUp.vue'
+// import SignUp from './views/Cliente/SignUp.vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
 Vue.use(Router)
 
+const Login = () => import(/* webpackChunkName: "form" */'./views/Cliente/Login')
+const SignUp = () => import(/* webpackChunkNme "form" */'./views/Cliente/SignUp')
+
 const router = new Router({
+  mode: 'history',
   routes: [
-    {
-      path: '*',
-      redirect: '/home'
-    },
     {
       path: '/',
       redirect: '/login'

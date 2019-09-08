@@ -1,14 +1,16 @@
 <template>
     <div class="loginForm">
-        <vs-row>
+        <transition appear name="fade">
+            <div class="form">
+                <vs-row>
             <vs-col
                 vs-type="flex"
                 vs-justify="center"
                 vs-align="center"
                 vs-w="12"
                 vs-xs="12"
-                vs-xs-offset="0">
-                
+                vs-xs-offset="0"
+            >
                 <vs-input
                     :danger="danger"
                     :danger-text="dangerText"
@@ -22,12 +24,7 @@
             </vs-col>
         </vs-row>
         <vs-row>
-            <vs-col
-                vs-type="flex"
-                vs-justify="center"
-                vs-align="center"
-                vs-w="12"
-            >
+            <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
                 <vs-input
                     :danger="dangerPass"
                     :danger-text="dangerTextPass"
@@ -54,6 +51,8 @@
                 >Login</vs-button>
             </vs-col>
         </vs-row>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -68,6 +67,7 @@ export default {
             dangerPass: false,
             dangerText: '',
             dangerTextPass: '',
+            show: true
         }
     },
     methods: {
@@ -79,21 +79,22 @@ export default {
                     () => {
                         this.$router.replace({ name: 'home' })
                     },
-                    (err) => {
+                    err => {
                         console.log(err.message)
-                        if(err.message == 'The email address is badly formatted.'){
+                        if (err.message === 'The email address is badly formatted.') {
                             this.danger = true
-                            if(this.email === '')
+                            if (this.email === '')
                                 this.dangerText = 'É obrigatório preencher este campo'
                             else
-                                this.dangerText = 'Email mal preenchido'
+                                this.dangerText = 'Email mal formatado'
                         }
-                        if(err.message == 'The password is invalid or the user does not have a password.'){
+                        if (err.message === 'The password is invalid or the user does not have a password.') {
                             this.dangerPass = true
-                            if(this.senha === '')
+                            if (this.senha === '')
                                 this.dangerTextPass = 'É obrigatório preencher este campo'
                             else
-                                this.dangerTextPass = 'Senha não corresponde ao email'
+                                this.dangerTextPass =
+                                    'A senha não está correta'
                         }
                     }
                 )
@@ -117,5 +118,11 @@ export default {
 }
 .vs-button {
     margin: 25px 70px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .6s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
+  opacity: 0;
 }
 </style>
