@@ -19,6 +19,15 @@
                         <vs-input-number :color="tipo" min="10" max="200" v-model="qtdConvidados" label="Convidados:"/>
                      </div>
                 </vs-col>
+                
+
+            </vs-row>
+
+            <vs-row>
+
+                <vs-col vs-type="flex" vs-justify="flex-end" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
+                     <vs-button class="sendButton" @click.prevent="send" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">Enviar</vs-button>
+                </vs-col>
 
             </vs-row>
         </div>
@@ -46,7 +55,7 @@ export default {
 }
 </script>
 <style scoped>
-.form {
+.form { 
     text-align: center;
     margin: 5em auto;
     padding: 2em;
@@ -70,10 +79,8 @@ export default {
 
 .datePick{
     width: 130px;
-    margin-left: 2em;
+    margin: 0 2.65em;
 }
-
-
 .vs-row{
     margin: 2em 1em;
 }
@@ -81,5 +88,7 @@ export default {
     margin-left: 2em;
     margin-top: 1.25em;
 }
-
+.sendButton{
+    margin-right: 9.25em;
+}
 </style>
