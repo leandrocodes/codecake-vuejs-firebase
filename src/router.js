@@ -8,6 +8,7 @@ import 'firebase/auth'
 
 Vue.use(Router)
 
+//lazy load and render at same chunk
 const Login = () => import(/* webpackChunkName: "form" */'./views/Cliente/Login')
 const SignUp = () => import(/* webpackChunkNme "form" */'./views/Cliente/SignUp')
 
