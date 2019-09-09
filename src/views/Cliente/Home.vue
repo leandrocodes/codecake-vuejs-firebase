@@ -1,12 +1,38 @@
 <template>
-    <div>
-        <h1>Teste</h1>
-        <!-- <button @click="logout">Logout</button> -->
+    <div class="form">
+        <h1>Solicitação de Orçamento</h1>
+        <div class="inputForm">
+            <vs-row>
+                
+                <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
+                    <vs-input class="name-lastname" icon-no-border size="large" icon="edit" label="Nome completo: " :color="tipo"/>
+                    <vs-input class="phone" icon-no-border size="large" icon="phone_android" label="Telefone: " :color="tipo"/>
+                </vs-col>
+
+            </vs-row>
+            
+            <vs-row>
+                
+                <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
+                    <vs-input class="datePick" icon-no-border icon="date_range" size="large" label="Data: " :color="tipo"/>
+                    <div class="centery">
+                        <vs-input-number :color="tipo" min="10" max="200" v-model="qtdConvidados" label="Convidados:"/>
+                     </div>
+                </vs-col>
+
+            </vs-row>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
+    data() {
+        return {
+             tipo: '#9C7DC9',
+             qtdConvidados: 10
+        }
+    },
     methods: {
         /* logout: function() {
             this.$firebase
@@ -20,7 +46,40 @@ export default {
 }
 </script>
 <style scoped>
-div{
+.form {
     text-align: center;
+    margin: 5em auto;
+    padding: 2em;
+    background: white;
+    width: 55%;
+    border-radius: 15px;
 }
+
+.inputForm{
+    text-align: left;
+}
+
+.name-lastname{
+    width: 250px;
+}
+
+.phone{
+    width: 150px;
+    margin-left: 2em;
+}
+
+.datePick{
+    width: 130px;
+    margin-left: 2em;
+}
+
+
+.vs-row{
+    margin: 2em 1em;
+}
+.vs-input-number{
+    margin-left: 2em;
+    margin-top: 1.25em;
+}
+
 </style>
