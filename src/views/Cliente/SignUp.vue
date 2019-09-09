@@ -26,6 +26,8 @@
                 <vs-row>
                     <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
                         <vs-input
+                            :danger="dangerPass"
+                            :danger-text="dangerTextPass"
                             icon-no-border
                             size="large"
                             icon="lock"
@@ -81,23 +83,37 @@ export default {
             dangerPass: false,
             dangerText: '',
             dangerTextPass: ''
+            
         }
     },
     methods: {
         cadastrar() {
-            this.$firebase.auth().createUserWithEmailAndPassword(this.email, this.senha)
+            this.$firebase.auth().createUserWithEmailAndPassword(this.email, this.confirmarSenha)
                 .then(() => {
                         this.$router.replace('/login')
                     },
                     err => {
                         console.log(err.message)
-                        if (err.message === 'The email addres is badly formatted.') {
+                        this.dangerText = ''
+                        this.danger = false
+                        this.dangerTextPass = ''
+                        this.dangerPass = false
+                        if (err.message === 'The email address is badly formatted.') {
                             this.danger = true
                             if (this.email === '')
                                 this.dangerText = 'É obrigatório preencher este campo'
                             else 
                                 this.dangerText = 'Email mal formatado'
                         }
+                        if(err.message === 'The password must be 6 characters long or more.'){
+                            // console.log(err.message)
+                            this.dangerPass = true
+                            if((this.confirmarSenha && this.senha) === '')
+                                this.dangerTextPass = 'É obrigatório preencher este campo'
+                            
+                            
+                        }
+
                     }
                 )
         }
@@ -107,7 +123,12 @@ export default {
             if (this.senha !== this.confirmarSenha) {
                 this.dangerPass = true
                 this.dangerTextPass = 'Senhas diferentes'
+            } else {
+                this.dangerPass = false
+                this.dangerTextPass = ''
             }
+
+
         }
     }
 }
