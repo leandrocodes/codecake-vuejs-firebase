@@ -63,6 +63,7 @@
                             color="#b39cd0"
                             gradient-color-secondary="#845EC2"
                             type="gradient"
+                            :disabled="dangerPass"
                         >Cadastrar</vs-button>
                     </vs-col>
                 </vs-row>
@@ -110,8 +111,6 @@ export default {
                             this.dangerPass = true
                             if((this.confirmarSenha && this.senha) === '')
                                 this.dangerTextPass = 'É obrigatório preencher este campo'
-                            
-                            
                         }
 
                     }
@@ -120,14 +119,21 @@ export default {
     },
     watch: {
         confirmarSenha() {
+            
             if (this.senha !== this.confirmarSenha) {
                 this.dangerPass = true
                 this.dangerTextPass = 'Senhas diferentes'
-            } else {
+            } 
+            else if((this.senha === this.confirmarSenha) && (this.senha.length < 6)){
+                this.dangerPass = true
+                this.dangerTextPass = 'As senhas devem conter mais de 6 caracteres'
+            }
+            else {
                 this.dangerPass = false
                 this.dangerTextPass = ''
             }
 
+            
 
         }
     }
