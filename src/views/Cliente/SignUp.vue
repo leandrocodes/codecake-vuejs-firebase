@@ -94,7 +94,7 @@ export default {
                         this.$router.replace('/login')
                     },
                     err => {
-                        console.log(err.message)
+                        //console.log(err.message)
                         this.dangerText = ''
                         this.danger = false
                         this.dangerTextPass = ''
@@ -126,7 +126,7 @@ export default {
             } 
             else if((this.senha === this.confirmarSenha) && (this.senha.length < 6)){
                 this.dangerPass = true
-                this.dangerTextPass = 'As senhas devem conter mais de 6 caracteres'
+                this.dangerTextPass = 'As senhas devem conter mais de 6 ou mais caracteres'
             }
             else {
                 this.dangerPass = false

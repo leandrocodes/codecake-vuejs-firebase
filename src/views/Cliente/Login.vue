@@ -77,7 +77,12 @@ export default {
                         this.$router.replace({ name: 'home' })
                     }, 
                     err => {
-                        console.log(err.message)
+                        //console.log(err.message)
+                        this.dangerText = ''
+                        this.danger = false
+                        this.dangerTextPass = ''
+                        this.dangerPass = false
+                        
                         if (err.message === 'The email address is badly formatted.') {
                             this.danger = true
                             if (this.email === '')
