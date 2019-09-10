@@ -1,8 +1,15 @@
 <template>
     <div class="admin">
         <h1>
-            Listagem de clientes
+            Listagem de clientes 
         </h1>
+
+        <vs-row style="margin: 20px 0;">
+             <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
+                <vs-button icon="exit_to_app" @click.prevent="logout" color="#b39cd0"  gradient-color-secondary="#845EC2" type="gradient" >Sair</vs-button>
+            </vs-col>
+        </vs-row>        
+           
 
         <vs-list v-for="(usuario, id) in usuarios" :key="id">
             <vs-list-header icon="supervisor_account" :title="usuario.nome"></vs-list-header>
@@ -15,7 +22,7 @@
         <br>
         </vs-list>
 
-        <vs-button @click.prevent="logout" color="#b39cd0"  gradient-color-secondary="#845EC2" type="gradient" >Sair</vs-button>
+        
 
     </div>
 </template>
@@ -51,7 +58,6 @@ export default {
 </script>
 
 <style>
-
 .admin{
     background-color: white;
     width: 75%;

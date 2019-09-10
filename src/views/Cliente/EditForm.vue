@@ -33,7 +33,7 @@
             
             <vs-row>
                 <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
-                    <vs-button @click.prevent="logout" color="#b39cd0"  gradient-color-secondary="#845EC2" type="gradient" >Sair</vs-button>
+                    <vs-button icon="exit_to_app" @click.prevent="logout" color="#b39cd0"  gradient-color-secondary="#845EC2" type="gradient" >Sair</vs-button>
                 </vs-col>
             </vs-row>
 
