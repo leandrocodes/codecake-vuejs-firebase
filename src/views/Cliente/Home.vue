@@ -1,7 +1,7 @@
 <template>
     <div class="form">
         <h1>Solicitação de Orçamento</h1>
-        <div class="inputForm">
+        <div class="inputForm" v-if='formInput'>
             <vs-row>
                 
                 <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
@@ -26,10 +26,14 @@
             <vs-row>
 
                 <vs-col vs-type="flex" vs-justify="flex-end" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
-                     <vs-button class="sendButton" @click.prevent="send" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">Enviar</vs-button>
+                     <vs-button class="sendButton" @click.prevent="send" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient" >Enviar</vs-button>
                 </vs-col>
 
             </vs-row>
+        </div>
+        <div v-else>
+            <br>
+            <h3>Orçamento enviado com sucesso!</h3>
         </div>
     </div>
 </template>
@@ -43,6 +47,7 @@ export default {
              nome: '',
              telefone: '',
              data: '',
+             formInput: true
         }
     },
     methods: {
@@ -70,6 +75,9 @@ export default {
                 this.nome = ''
                 this.telefone = ''
                 this.data = ''
+                this.formInput = false
+            } else {
+                alert('Nenhum dado foi preenchido!')
             }
         }
 
