@@ -89,28 +89,31 @@ export default {
     },
     methods: {
         cadastrar() {
-            this.$firebase.auth().createUserWithEmailAndPassword(this.email, this.confirmarSenha)
+            let firebase = this.$firebase
+            let {danger, dangerText, dangerPass, dangerTextPass} = this
+
+            firebase.auth().createUserWithEmailAndPassword(this.email, this.confirmarSenha)
                 .then(() => {
                         this.$router.replace('/login')
                     },
                     err => {
                         //console.log(err.message)
-                        this.dangerText = ''
-                        this.danger = false
-                        this.dangerTextPass = ''
-                        this.dangerPass = false
+                        dangerText = ''
+                        danger = false
+                        dangerTextPass = ''
+                        dangerPass = false
                         if (err.message === 'The email address is badly formatted.') {
-                            this.danger = true
-                            if (this.email === '')
-                                this.dangerText = 'É obrigatório preencher este campo'
+                            danger = true
+                            if (email === '')
+                                dangerText = 'É obrigatório preencher este campo'
                             else 
-                                this.dangerText = 'Email mal formatado'
+                                dangerText = 'Email mal formatado'
                         }
                         if(err.message === 'The password must be 6 characters long or more.'){
                             // console.log(err.message)
-                            this.dangerPass = true
-                            if((this.confirmarSenha && this.senha) === '')
-                                this.dangerTextPass = 'É obrigatório preencher este campo'
+                            dangerPass = true
+                            if((confirmarSenha && senha) === '')
+                                dangerTextPass = 'É obrigatório preencher este campo'
                         }
 
                     }
