@@ -27,7 +27,6 @@
 
                 <vs-col vs-type="flex" vs-justify="flex-end" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
                      <vs-button class="sendButton" @click.prevent="send" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">Enviar</vs-button>
-                     <vs-button class="sendButton" @click="logout" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">log out</vs-button>
                 </vs-col>
 
             </vs-row>
@@ -47,14 +46,28 @@ export default {
         }
     },
     methods: {
-         logout: function() {
-            this.$firebase
-                .auth()
-                .signOut()
-                .then(() => {
+         logout() {
+            this.$firebase.auth().signOut().then(() => {
                     this.$router.replace('login')
                 })
+        },
+        send(){
+            let firebase = this.$firebase
+            let {qtdConvidados, nome, telefone, data} = this
+
+            let user = firebase.auth().currentUser
+            //console.log(user)
+            firebase.database().ref('/users'+ user.uid).set({
+                quantidadeDeConvidados: qtdConvidados,
+                nome: nome,
+                data: data,
+                telefone: telefone
+            }, err=> {
+                console.log(err)
+            })
+
         }
+
     }
 }
 </script>

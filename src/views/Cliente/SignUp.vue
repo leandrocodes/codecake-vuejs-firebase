@@ -136,9 +136,6 @@ export default {
                 dangerPass = false
                 dangerTextPass = ''
             }
-
-            
-
         }
     }
 }
