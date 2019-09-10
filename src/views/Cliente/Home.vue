@@ -33,7 +33,7 @@
         </div>
         <div v-else>
             <br>
-            <h3>Orçamento enviado com sucesso!</h3>
+            <h3>O seu pedido já foi enviado!</h3>
         </div>
     </div>
 </template>
@@ -47,7 +47,7 @@ export default {
              nome: '',
              telefone: '',
              data: '',
-             formInput: true
+             formInput: true,
         }
     },
     methods: {
@@ -63,11 +63,13 @@ export default {
             if((qtdConvidados && nome && telefone && data) !== ''){
                 let user = firebase.auth().currentUser
                 //console.log(user)
-                firebase.database().ref('/users'+ user.uid).set({
+                firebase.database().ref('/users/'+ user.uid).set({
                     quantidadeDeConvidados: qtdConvidados,
                     nome: nome,
                     data: data,
-                    telefone: telefone
+                    telefone: telefone,
+                    email: user.email,
+                    formInput: 'preenchido'
                 }, err=> {
                     //console.log(err)
                 })
@@ -82,6 +84,13 @@ export default {
         }
 
     },
+    created() {
+        let firebase = this.$firebase
+        let user = firebase.auth().currentUser
+        let pre = firebase.database().ref('/users/' + user.uid + '/formInput')
+        if(pre)
+            this.formInput = false
+    }
 }
 </script>
 <style scoped>
