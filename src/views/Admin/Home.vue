@@ -64,6 +64,7 @@ export default {
     margin: 0 auto;
     margin-top: 5em;
     border-radius: 1em;
+    padding: 5em;
 }
 
 .admin h1{
