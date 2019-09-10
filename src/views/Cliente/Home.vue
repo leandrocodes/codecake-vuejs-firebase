@@ -6,7 +6,7 @@
                 
                 <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
                     <vs-input class="name-lastname" icon-no-border size="large" icon="edit" label="Nome completo:" placeholder="Nome Sobrenome" :color="tipo" v-model="nome"/>
-                    <vs-input class="phone" icon-no-border size="large" icon="phone_android" label="Telefone:n" placeholder="(00) 00000-0000" :color="tipo" v-model="telefone"/>
+                    <vs-input class="phone" icon-no-border size="large" icon="phone_android" label="Telefone:" :color="tipo" v-model="telefone"/>
                 </vs-col>
 
             </vs-row>
@@ -51,24 +51,29 @@ export default {
                     this.$router.replace('login')
                 })
         },
-        send(){
+        send() {
             let firebase = this.$firebase
             let {qtdConvidados, nome, telefone, data} = this
-
-            let user = firebase.auth().currentUser
-            //console.log(user)
-            firebase.database().ref('/users'+ user.uid).set({
-                quantidadeDeConvidados: qtdConvidados,
-                nome: nome,
-                data: data,
-                telefone: telefone
-            }, err=> {
-                console.log(err)
-            })
-
+            
+            if((qtdConvidados && nome && telefone && data) !== ''){
+                let user = firebase.auth().currentUser
+                //console.log(user)
+                firebase.database().ref('/users'+ user.uid).set({
+                    quantidadeDeConvidados: qtdConvidados,
+                    nome: nome,
+                    data: data,
+                    telefone: telefone
+                }, err=> {
+                    //console.log(err)
+                })
+                this.qtdConvidados = ''
+                this.nome = ''
+                this.telefone = ''
+                this.data = ''
+            }
         }
 
-    }
+    },
 }
 </script>
 <style scoped>

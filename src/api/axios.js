@@ -5,7 +5,7 @@ Vue.use({
     install(Vue) {
         //Vue.prototype.$http = axios
         Vue.prototype.axios = axios.create({
-            baseURL: 'https://vue-udemy-47d60.firebaseio.com/',
+            baseURL: VUE_APP_DATABASE_URL,
             headers: {
                 "Authorization": "abc123"
             }
