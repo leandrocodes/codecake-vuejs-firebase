@@ -34,6 +34,15 @@
         <div v-else>
             <br>
             <h3>O seu pedido já foi enviado!</h3>
+            
+            <vs-row>
+                <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
+                     <router-link to='/editForm'>
+                        <vs-button icon="edit" color="#b39cd0"  gradient-color-secondary="#845EC2" type="gradient" >Editar Orçamento</vs-button>
+                     </router-link>
+                </vs-col>
+            </vs-row>
+
         </div>
     </div>
 </template>

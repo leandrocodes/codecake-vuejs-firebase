@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import FirebaseVue from './api/firebase'
+import './api/axios'
 import './plugins/vuesax.js'
 
 

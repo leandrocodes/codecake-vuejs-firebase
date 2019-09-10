@@ -1,16 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-//import Login from './views/Cliente/Login.vue'
-import Home from './views/Cliente/Home.vue'
-// import SignUp from './views/Cliente/SignUp.vue'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-
+import Home from './views/Cliente/Home'
 Vue.use(Router)
 
 //lazy load and render at same chunk
 const Login = () => import(/* webpackChunkName: "form" */'./views/Cliente/Login')
 const SignUp = () => import(/* webpackChunkNme "form" */'./views/Cliente/SignUp')
+
+const EditForm = () => import('./views/Cliente/EditForm')
 
 const router = new Router({
   mode: 'history',
@@ -33,6 +32,12 @@ const router = new Router({
       path: '/home',
       name: 'home',
       component: Home,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/editForm',
+      name: 'editForm',
+      component: EditForm,
       meta: { requiresAuth: true }
     },
   ]
