@@ -9,6 +9,9 @@ Vue.use(Router)
 const Login = () => import(/* webpackChunkName: "form" */'./views/Cliente/Login')
 const SignUp = () => import(/* webpackChunkNme "form" */'./views/Cliente/SignUp')
 
+const LoginAdmin = () => import(/* webpackChunkNme "form" */'./views/Admin/Login')
+const HomeAdmin = () => import(/* webpackChunkNme "form" */'./views/Admin/Home')
+
 const EditForm = () => import('./views/Cliente/EditForm')
 
 const router = new Router({
@@ -24,6 +27,11 @@ const router = new Router({
       component: Login
     },
     {
+      path: '/loginAdmin',
+      name: 'loginAdmin',
+      component: LoginAdmin
+    },
+    {
       path: '/signup',
       name: 'signup',
       component: SignUp
@@ -32,6 +40,12 @@ const router = new Router({
       path: '/home',
       name: 'home',
       component: Home,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/homeAdmin',
+      name: 'homeAdmin',
+      component: HomeAdmin,
       meta: { requiresAuth: true }
     },
     {
