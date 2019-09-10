@@ -90,11 +90,12 @@ export default {
     methods: {
         cadastrar() {
             let firebase = this.$firebase
+            let router = this.$router
             let {danger, dangerText, dangerPass, dangerTextPass} = this
 
             firebase.auth().createUserWithEmailAndPassword(this.email, this.confirmarSenha)
                 .then(() => {
-                        this.$router.replace('/login')
+                        router.replace('/login')
                     },
                     err => {
                         //console.log(err.message)
@@ -122,18 +123,18 @@ export default {
     },
     watch: {
         confirmarSenha() {
-            
-            if (this.senha !== this.confirmarSenha) {
-                this.dangerPass = true
-                this.dangerTextPass = 'Senhas diferentes'
+            let {senha, confirmarSenha} = this
+            if (senha !== confirmarSenha) {
+                dangerPass = true
+                dangerTextPass = 'Senhas diferentes'
             } 
-            else if((this.senha === this.confirmarSenha) && (this.senha.length < 6)){
-                this.dangerPass = true
-                this.dangerTextPass = 'As senhas devem conter mais de 6 ou mais caracteres'
+            else if((senha === confirmarSenha) && (senha.length < 6)){
+                dangerPass = true
+                dangerTextPass = 'As senhas devem conter mais de 6 ou mais caracteres'
             }
             else {
-                this.dangerPass = false
-                this.dangerTextPass = ''
+                dangerPass = false
+                dangerTextPass = ''
             }
 
             
