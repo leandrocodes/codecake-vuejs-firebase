@@ -11,25 +11,22 @@
             </vs-row>
             
             <vs-row>
-                
                 <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
                     <vs-input class="datePick" placeholder="00/00/0000" icon-no-border icon="date_range" size="large" label="Data: " :color="tipo" v-model="data"/>
                     <div class="centery">
                         <vs-input-number :color="tipo" min="10" max="200" v-model="qtdConvidados" label="Convidados:"/>
                      </div>
                 </vs-col>
-                
-
             </vs-row>
 
             <vs-row>
-
                 <vs-col vs-type="flex" vs-justify="flex-end" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
                      <vs-button class="sendButton" @click.prevent="send" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">Confirmar</vs-button>
                 </vs-col>
-
             </vs-row>
+
         </div>
+        
         <div v-else>
             <br>
             <h3>O seu pedido já foi enviado!</h3>

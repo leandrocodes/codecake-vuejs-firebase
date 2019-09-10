@@ -96,9 +96,10 @@ export default {
     created() {
         let firebase = this.$firebase
         let user = firebase.auth().currentUser
-        let pre = firebase.database().ref('/users/' + user.uid + '/formInput')
-        if(pre)
-            this.formInput = false
+        firebase.database().ref(`/users/${user.uid}/formInput`).once('value').then(snapshot =>{
+            if(snapshot.val())
+                this.formInput = false
+        })
     }
 }
 </script>
