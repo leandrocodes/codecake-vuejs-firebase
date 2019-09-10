@@ -37,6 +37,7 @@
             
             <vs-row>
                 <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
+                    <vs-button class="logout" @click.prevent="logout" color="#b39cd0"  gradient-color-secondary="#845EC2" type="gradient" >Sair</vs-button>
                      <router-link to='/editForm'>
                         <vs-button icon="edit" color="#b39cd0"  gradient-color-secondary="#845EC2" type="gradient" >Editar Orçamento</vs-button>
                      </router-link>
@@ -115,6 +116,9 @@ export default {
 
 .inputForm{
     text-align: left;
+}
+.logout{
+    margin-right: 100px;
 }
 
 .name-lastname{

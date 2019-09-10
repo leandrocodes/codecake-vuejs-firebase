@@ -74,7 +74,7 @@ export default {
                 .then(() => {
                         let user = firebase.auth().currentUser
                         firebase.database().ref(`/admin/${user.uid}/admin`).once('value').then(snapshot =>{
-                            console.log(snapshot.val())
+                            //console.log(snapshot.val())
                             if(snapshot.val()){
                                  this.$router.replace('/homeAdmin')
                             } else {

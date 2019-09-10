@@ -91,7 +91,7 @@ export default {
         cadastrar() {
             let firebase = this.$firebase
             let router = this.$router
-            let {danger, dangerText, dangerPass, dangerTextPass} = this
+            
 
             firebase.auth().createUserWithEmailAndPassword(this.email, this.confirmarSenha)
                 .then(() => {
@@ -99,22 +99,22 @@ export default {
                     },
                     err => {
                         //console.log(err.message)
-                        dangerText = ''
-                        danger = false
-                        dangerTextPass = ''
-                        dangerPass = false
+                        this.dangerText = ''
+                        this.danger = false
+                        this.dangerTextPass = ''
+                        this.dangerPass = false
                         if (err.message === 'The email address is badly formatted.') {
-                            danger = true
+                            this.danger = true
                             if (email === '')
-                                dangerText = 'É obrigatório preencher este campo'
+                                this.dangerText = 'É obrigatório preencher este campo'
                             else 
-                                dangerText = 'Email mal formatado'
+                                this.dangerText = 'Email mal formatado'
                         }
                         if(err.message === 'The password must be 6 characters long or more.'){
                             // console.log(err.message)
-                            dangerPass = true
+                            this.dangerPass = true
                             if((confirmarSenha && senha) === '')
-                                dangerTextPass = 'É obrigatório preencher este campo'
+                                this.dangerTextPass = 'É obrigatório preencher este campo'
                         }
 
                     }
@@ -125,16 +125,16 @@ export default {
         confirmarSenha() {
             let {senha, confirmarSenha} = this
             if (senha !== confirmarSenha) {
-                dangerPass = true
-                dangerTextPass = 'Senhas diferentes'
+                this.dangerPass = true
+                this.dangerTextPass = 'Senhas diferentes'
             } 
             else if((senha === confirmarSenha) && (senha.length < 6)){
-                dangerPass = true
-                dangerTextPass = 'As senhas devem conter mais de 6 ou mais caracteres'
+                this.dangerPass = true
+                this.dangerTextPass = 'As senhas devem conter mais de 6 ou mais caracteres'
             }
             else {
-                dangerPass = false
-                dangerTextPass = ''
+                this.dangerPass = false
+                this.dangerTextPass = ''
             }
         }
     }
