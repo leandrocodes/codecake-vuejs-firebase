@@ -2,6 +2,7 @@
     <div class="loginForm">
         <transition appear name="fade">
             <div class="form">
+                <h3 style="text-align: center; margin-bottom: 50px">Login</h3>
                 <vs-row>
                     <vs-col
                         vs-type="flex"
@@ -74,7 +75,7 @@ export default {
         login() {
             this.$firebase.auth().signInWithEmailAndPassword(this.email, this.senha)
                 .then(() => {
-                        this.$router.replace({ name: 'home' })
+                        this.$router.push('/home')
                     }, 
                     err => {
                         //console.log(err.message)

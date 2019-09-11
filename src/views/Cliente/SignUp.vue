@@ -2,6 +2,7 @@
     <div class="loginForm">
         <transition appear name="fade">
             <div class="form">
+                <h3 style="text-align: center; margin-bottom: 50px">Registro</h3>
                 <vs-row>
                     <vs-col
                         vs-type="flex"
