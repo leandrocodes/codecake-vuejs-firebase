@@ -6,10 +6,6 @@ Vue.use({
         //Vue.prototype.$http = axios
         Vue.prototype.axios = axios.create({
             baseURL:  process.env.VUE_APP_DATABASE_URL,
-            headers: {
-                "Authorization": "abc123"
-            }
-
         })
 
         Vue.prototype.axios.interceptors.request.use(config => {
