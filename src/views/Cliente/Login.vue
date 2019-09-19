@@ -4,14 +4,7 @@
             <div class="form">
                 <h3 style="text-align: center; margin-bottom: 50px">Login</h3>
                 <vs-row>
-                    <vs-col
-                        vs-type="flex"
-                        vs-justify="center"
-                        vs-align="center"
-                        vs-w="12"
-                        vs-xs="12"
-                        vs-xs-offset="0"
-                    >
+                    <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
                         <vs-input
                             :danger="danger"
                             :danger-text="dangerText"
@@ -44,12 +37,7 @@
                         <router-link to="/signup">
                             <vs-button color="#9490C0" type="flat">Cadastrar</vs-button>
                         </router-link>
-                        <vs-button
-                            @click.prevent="login"
-                            color="#b39cd0"
-                            gradient-color-secondary="#845EC2"
-                            type="gradient"
-                        >Login</vs-button>
+                        <vs-button @click.prevent="login" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">Login</vs-button>
                     </vs-col>
                 </vs-row>
             </div>
@@ -75,23 +63,23 @@ export default {
         login() {
             this.$firebase.auth().signInWithEmailAndPassword(this.email, this.senha)
                 .then(() => {
-                        this.$router.push('/home')
-                    }, 
+                    this.$router.push('/home')
+                },
                     err => {
                         //console.log(err.message)
                         this.dangerText = ''
                         this.danger = false
                         this.dangerTextPass = ''
                         this.dangerPass = false
-                        
+
                         if (err.message === 'The email address is badly formatted.') {
                             this.danger = true
                             if (this.email === '')
                                 this.dangerText = 'É obrigatório preencher este campo'
-                            else 
+                            else
                                 this.dangerText = 'Email mal formatado'
                         }
-                        if (err.message ==='The password is invalid or the user does not have a password.') {
+                        if (err.message === 'The password is invalid or the user does not have a password.') {
                             this.dangerPass = true
                             if (this.senha === '')
                                 this.dangerTextPass = 'É obrigatório preencher este campo'
@@ -102,10 +90,10 @@ export default {
         }
     },
     created() {
-        this.$firebase.auth().onAuthStateChanged( user => {
+        this.$firebase.auth().onAuthStateChanged(user => {
             if (user)
                 this.$router.push('/home')
-                //console.log(user)
+            //console.log(user)
         })
     }
 }

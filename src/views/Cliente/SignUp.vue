@@ -4,14 +4,7 @@
             <div class="form">
                 <h3 style="text-align: center; margin-bottom: 50px">Registro</h3>
                 <vs-row>
-                    <vs-col
-                        vs-type="flex"
-                        vs-justify="center"
-                        vs-align="center"
-                        vs-w="12"
-                        vs-xs="12"
-                        vs-xs-offset="0"
-                    >
+                    <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
                         <vs-input
                             :danger="danger"
                             :danger-text="dangerText"
@@ -85,51 +78,50 @@ export default {
             dangerPass: false,
             dangerText: '',
             dangerTextPass: ''
-            
+
         }
     },
     methods: {
         cadastrar() {
             let firebase = this.$firebase
             let router = this.$router
-            
 
-            firebase.auth().createUserWithEmailAndPassword(this.email, this.confirmarSenha)
-                .then(() => {
-                        router.replace('/login')
-                    },
-                    err => {
-                        //console.log(err.message)
-                        this.dangerText = ''
-                        this.danger = false
-                        this.dangerTextPass = ''
-                        this.dangerPass = false
-                        if (err.message === 'The email address is badly formatted.') {
-                            this.danger = true
-                            if (email === '')
-                                this.dangerText = 'É obrigatório preencher este campo'
-                            else 
-                                this.dangerText = 'Email mal formatado'
-                        }
-                        if(err.message === 'The password must be 6 characters long or more.'){
-                            // console.log(err.message)
-                            this.dangerPass = true
-                            if((confirmarSenha && senha) === '')
-                                this.dangerTextPass = 'É obrigatório preencher este campo'
-                        }
 
+            firebase.auth().createUserWithEmailAndPassword(this.email, this.confirmarSenha).then(() => {
+                router.replace('/login')
+            },
+                err => {
+                    //console.log(err.message)
+                    this.dangerText = ''
+                    this.danger = false
+                    this.dangerTextPass = ''
+                    this.dangerPass = false
+                    if (err.message === 'The email address is badly formatted.') {
+                        this.danger = true
+                        if (email === '')
+                            this.dangerText = 'É obrigatório preencher este campo'
+                        else
+                            this.dangerText = 'Email mal formatado'
                     }
-                )
+                    if (err.message === 'The password must be 6 characters long or more.') {
+                        // console.log(err.message)
+                        this.dangerPass = true
+                        if ((confirmarSenha && senha) === '')
+                            this.dangerTextPass = 'É obrigatório preencher este campo'
+                    }
+
+                }
+            )
         }
     },
     watch: {
         confirmarSenha() {
-            let {senha, confirmarSenha} = this
+            let { senha, confirmarSenha } = this
             if (senha !== confirmarSenha) {
                 this.dangerPass = true
                 this.dangerTextPass = 'Senhas diferentes'
-            } 
-            else if((senha === confirmarSenha) && (senha.length < 6)){
+            }
+            else if ((senha === confirmarSenha) && (senha.length < 6)) {
                 this.dangerPass = true
                 this.dangerTextPass = 'As senhas devem conter mais de 6 ou mais caracteres'
             }
