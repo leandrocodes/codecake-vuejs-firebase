@@ -3,14 +3,7 @@
         <transition appear name="fade">
             <div class="form">
                 <vs-row>
-                    <vs-col
-                        vs-type="flex"
-                        vs-justify="center"
-                        vs-align="center"
-                        vs-w="12"
-                        vs-xs="12"
-                        vs-xs-offset="0"
-                    >
+                    <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
                         <vs-input
                             :danger="danger"
                             :danger-text="dangerText"
@@ -40,12 +33,7 @@
                 </vs-row>
                 <vs-row>
                     <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
-                        <vs-button
-                            @click.prevent="login"
-                            color="#b39cd0"
-                            gradient-color-secondary="#845EC2"
-                            type="gradient"
-                        >Login</vs-button>
+                        <vs-button @click.prevent="login" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">Login</vs-button>
                     </vs-col>
                 </vs-row>
             </div>
@@ -70,45 +58,42 @@ export default {
     methods: {
         login() {
             let firebase = this.$firebase
-            firebase.auth().signInWithEmailAndPassword(this.email, this.senha)
-                .then(() => {
-                        let user = firebase.auth().currentUser
-                        firebase.database().ref(`/admin/${user.uid}/admin`).once('value').then(snapshot =>{
-                            //console.log(snapshot.val())
-                            if(snapshot.val()){
-                                 this.$router.replace('/homeAdmin')
-                            } else {
-                                alert('Você não é admin!')
-                                firebase.auth().signOut().then( ()=>{
-                                    this.$router.replace('/login')
-                                })
-                               
-                            }
+            firebase.auth().signInWithEmailAndPassword(this.email, this.senha).then(() => {
+                let user = firebase.auth().currentUser
+                firebase.database().ref(`/admin/${user.uid}/admin`).once('value').then(snapshot => {
+                    //console.log(snapshot.val())
+                    if (snapshot.val()) {
+                        this.$router.replace('/homeAdmin')
+                    } else {
+                        alert('Você não é admin!')
+                        firebase.auth().signOut().then(() => {
+                            this.$router.replace('/login')
                         })
-                        
-                    }, 
-                    err => {
-                        //console.log(err.message)
-                        this.dangerText = ''
-                        this.danger = false
-                        this.dangerTextPass = ''
-                        this.dangerPass = false
-                        
-                        if (err.message === 'The email address is badly formatted.') {
-                            this.danger = true
-                            if (this.email === '')
-                                this.dangerText = 'É obrigatório preencher este campo'
-                            else 
-                                this.dangerText = 'Email mal formatado'
-                        }
-                        if (err.message ==='The password is invalid or the user does not have a password.') {
-                            this.dangerPass = true
-                            if (this.senha === '')
-                                this.dangerTextPass = 'É obrigatório preencher este campo'
-                            else
-                                this.dangerTextPass = 'A senha não está correta'
-                        }
-                    })
+                    }
+                })
+            },
+                err => {
+                    //console.log(err.message)
+                    this.dangerText = ''
+                    this.danger = false
+                    this.dangerTextPass = ''
+                    this.dangerPass = false
+
+                    if (err.message === 'The email address is badly formatted.') {
+                        this.danger = true
+                        if (this.email === '')
+                            this.dangerText = 'É obrigatório preencher este campo'
+                        else this.dangerText = 'Email mal formatado'
+                    }
+                    if (err.message === 'The password is invalid or the user does not have a password.') {
+                        this.dangerPass = true
+                        if (this.senha === '')
+                            this.dangerTextPass = 'É obrigatório preencher este campo'
+                        else
+                            this.dangerTextPass = 'A senha não está correta'
+                    }
+                }
+            )
         }
     }
 }
