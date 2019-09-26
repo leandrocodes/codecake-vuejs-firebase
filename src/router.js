@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import Home from './views/Cliente/Home'
+import Candidato from './views/Candidato/Candidato.vue'
 Vue.use(Router)
 
 //lazy load and render at same chunk
@@ -35,6 +36,11 @@ const router = new Router({
       path: '/signup',
       name: 'signup',
       component: SignUp
+    },
+    {
+      path: '/candidato',
+      name: 'candidato',
+      component: Candidato
     },
     {
       path: '/home',
