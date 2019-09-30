@@ -14,6 +14,7 @@ const LoginAdmin = () => import(/* webpackChunkNme "admin" */'./views/Admin/Logi
 const HomeAdmin = () => import(/* webpackChunkNme "admin" */'./views/Admin/Home')
 const ListClients = () => import(/* webpackChunkNme "admin" */'./views/Admin/ListClientes.vue')
 const ListCandidatos = () => import(/* webpackChunkNme "admin" */'./views/Admin/ListCandidatos.vue')
+const CandidatoDetalhe = () => import(/* webpackChunkNme "admin" */'./views/Admin/CandidatoDetalhe.vue')
 
 const EditForm = () => import('./views/Cliente/EditForm')
 
@@ -63,11 +64,20 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
-      path: '/listCandidatos',
-      name: 'listCandidatos',
+      path: '/listCandidato',
+      name: 'listCandidato',
       component: ListCandidatos,
-      meta: { requiresAuth: true }
+      // meta: { requiresAuth: true },
+      children: [
+        {
+          path: ':id',
+          component: CandidatoDetalhe,
+          props: true,
+          name: 'candidatoDetalhe'
+        }
+      ]
     },
+
     {
       path: '/editForm',
       name: 'editForm',

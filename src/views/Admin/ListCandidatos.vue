@@ -10,12 +10,8 @@
       </vs-col>
     </vs-row>
 
-    <vs-list v-for="(usuario, id) in usuarios" :key="id">
-      <vs-list-header icon="supervisor_account" :title="usuario.nome"></vs-list-header>
-      <vs-list-item title="Email: " :subtitle="usuario.email"></vs-list-item>
-      <vs-list-item title="Telefone: " :subtitle="usuario.telefone"></vs-list-item>
-      <vs-list-item title="N° de Convidados: " :subtitle="usuario.quantidadeDeConvidados"></vs-list-item>
-      <vs-list-item title="Data: " :subtitle="usuario.data"></vs-list-item>
+    <vs-list v-for="(usuario, uid) in usuarios" :key="uid">
+      <vs-list-header icon="supervisor_account" :title="uid"></vs-list-header>
       <br />
       <hr />
       <br />
@@ -29,12 +25,9 @@ export default {
     return {
       usuario: {
         nome: '',
-        email: '',
-        telefone: '',
-        quantidadeDeConvidados: '',
-        data: ''
       },
-      usuarios: []
+      usuarios: [],
+      
     }
   },
   methods: {
@@ -43,8 +36,9 @@ export default {
     }
   },
   created() {
-    this.axios.get('users.json').then(res => {
+    this.axios.get('candidatos.json').then(res => {
       this.usuarios = res.data
+      console.log(this.usuarios)
     })
   }
 }
