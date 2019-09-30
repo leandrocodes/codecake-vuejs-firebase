@@ -19,25 +19,25 @@
 
       <vs-row vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="2">
-          <vs-input v-model="candidato.nome" color="#b39cd0" label="CPF: " placeholder="032.123.766-88" />
+          <vs-input v-model="candidato.cpf" color="#b39cd0" label="CPF: " placeholder="032.123.766-88" />
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="2">
-          <vs-input v-model="candidato.nome" color="#b39cd0" label="RG: " placeholder="1.234.567" />
+          <vs-input v-model="candidato.rg" color="#b39cd0" label="RG: " placeholder="1.234.567" />
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="2">
-          <vs-input v-model="candidato.sobrenome" color="#b39cd0" label="Nascimento:" placeholder="31/01/2000" />
+          <vs-input v-model="candidato.nascimento" color="#b39cd0" label="Nascimento:" placeholder="31/01/2000" />
         </vs-col>
       </vs-row>
 
       <vs-row vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="3">
-          <vs-input v-model="candidato.nome" color="#b39cd0" label="Rua: " placeholder="ex: Av. Brasil" />
+          <vs-input v-model="candidato.endereco.rua" color="#b39cd0" label="Rua: " placeholder="ex: Av. Brasil" />
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="3">
-          <vs-input v-model="candidato.sobrenome" color="#b39cd0" label="Bairro:" placeholder="ex: Jd. Botânico" />
+          <vs-input v-model="candidato.endereco.bairro" color="#b39cd0" label="Bairro:" placeholder="ex: Jd. Botânico" />
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="1">
-          <vs-input v-model="candidato.sobrenome" color="#b39cd0" label="Número:" placeholder="123" />
+          <vs-input v-model="candidato.endereco.numero" color="#b39cd0" label="Número:" placeholder="123" />
         </vs-col>
       </vs-row>
 
@@ -48,21 +48,25 @@
       </vs-row>
 
       <vs-row vs-type="flex" vs-jusitfy="center" vs-align="center" vs-w="12">
-        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="8">
-          <input type="file" multiple accept="image/jpeg" @change="detectFiles($event.target.files)" />
-          <div class="progress-bar" :style="{ width: progressUpload + '%'}">{{ progressUpload }}%</div>
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
+          <input style="margin: 0 auto;" type="file" accept="image/*" @change="detectFiles($event.target.files)" />
+          <!-- <div class="progress-bar" :style="{ width: progressUpload + '%'}">{{ progressUpload }}%</div> -->
         </vs-col>
-      </vs-row>
-
-      <vs-row>
-        <vs-col v-if="alert" vs-type="flex" vs-justify="center" vs-align="center">
-          <vs-alert :active.sync="alert" color="success" icon="check_circle" closable>Associado inserido com sucesso!</vs-alert>
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
+          <p style="margin: 0 auto;" v-if="progressUpload == 100">Pronto para enviar!</p>
+          <p style="margin: 0 auto;" v-else-if="progressUpload > 0 && progressUpload != 100">Carregando...</p>
         </vs-col>
       </vs-row>
 
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center">
           <vs-button icon="send" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient" size="small">Enviar</vs-button>
+        </vs-col>
+      </vs-row>
+
+      <vs-row>
+        <vs-col v-if="alert" vs-type="flex" vs-justify="center" vs-align="center">
+          <vs-alert :active.sync="alert" color="success" icon="check_circle" closable>Currículo Enviado com sucesso!</vs-alert>
         </vs-col>
       </vs-row>
     </form>
@@ -79,15 +83,16 @@ export default {
         cpf: '',
         cidade: '',
         uf: '',
-        endereco: '',
+        endereco:{rua: '', bairro: '', numero: ''},
         complemento: '',
         email: '',
         telefone: '',
         experiencias: '',
+        nascimento: ''
       },
       alert: false,
       progressUpload: 0,
-      file: File,
+      file: null,
       uploadTask: '',
 
     }
@@ -99,7 +104,12 @@ export default {
       })
     },
     upload(file) {
-      this.uploadTask = this.$firebase.storage().ref(`${candidato.cpf}`).put(file);
+      this.uploadTask = this.$firebase.storage().ref(`${this.candidato.cpf}pic`).put(file);
+    },
+    enviarCurriculo() {
+      this.axios.post(`candidatos.json/${this.candidato.cpf}`).then(() => {
+        this.usuarios = res.data
+      })
     }
   },
   watch: {
