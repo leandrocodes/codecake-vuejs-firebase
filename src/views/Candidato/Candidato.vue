@@ -17,6 +17,15 @@
         </vs-col>
       </vs-row>
 
+        <vs-row vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="2">
+          <vs-input v-model="candidato.telefone" color="#b39cd0" label="Nome: " placeholder="ex: João" />
+        </vs-col>
+        <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="2">
+          <vs-input v-model="candidato.email" color="#b39cd0" label="Sobrenome:" placeholder="ex: Silva" />
+        </vs-col>
+      </vs-row>
+
       <vs-row vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="2">
           <vs-input v-model="candidato.cpf" color="#b39cd0" label="CPF: " placeholder="032.123.766-88" />
@@ -40,6 +49,8 @@
           <vs-input v-model="candidato.endereco.numero" color="#b39cd0" label="Número:" placeholder="123" />
         </vs-col>
       </vs-row>
+
+    
 
       <vs-row vs-type="flex" vs-jusitfy="center" vs-align="center" vs-w="12">
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">

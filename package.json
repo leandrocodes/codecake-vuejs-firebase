@@ -12,6 +12,8 @@
     "firebase": "^6.5.0",
     "firebase-tools": "^7.3.2",
     "material-icons": "^0.2.3",
+    "run": "^1.4.0",
+    "serve": "^11.2.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuesax": "^3.10.0",
