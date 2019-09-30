@@ -49,7 +49,8 @@
 
       <vs-row vs-type="flex" vs-jusitfy="center" vs-align="center" vs-w="12">
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="8">
-          <vs-upload style="margin-left: 50%;" text="Escolha uma foto sua para o currículo" action="https://jsonplaceholder.typicode.com/posts/" />
+          <input type="file" multiple accept="image/jpeg" @change="detectFiles($event.target.files)" />
+          <div class="progress-bar" :style="{ width: progressUpload + '%'}">{{ progressUpload }}%</div>
         </vs-col>
       </vs-row>
 
@@ -61,7 +62,7 @@
 
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center">
-          <vs-button @click="add" icon="send" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient" size="small">Enviar</vs-button>
+          <vs-button icon="send" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient" size="small">Enviar</vs-button>
         </vs-col>
       </vs-row>
     </form>
@@ -83,15 +84,37 @@ export default {
         email: '',
         telefone: '',
         experiencias: '',
-        foto: {}
-
       },
-      alert: false
+      alert: false,
+      progressUpload: 0,
+      file: File,
+      uploadTask: '',
+
     }
   },
   methods: {
-    add() { }
-  }
+    detectFiles(fileList) {
+      Array.from(Array(fileList.length).keys()).map(x => {
+        this.upload(fileList[x])
+      })
+    },
+    upload(file) {
+      this.uploadTask = this.$firebase.storage().ref(`${candidato.cpf}`).put(file);
+    }
+  },
+  watch: {
+    uploadTask: function () {
+      this.uploadTask.on('state_changed', sp => {
+        this.progressUpload = Math.floor(sp.bytesTransferred / sp.totalBytes * 100)
+      },
+        null,
+        () => {
+          this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+            this.$emit('url', downloadURL)
+          })
+        })
+    }
+  },
 }
 </script>
 
