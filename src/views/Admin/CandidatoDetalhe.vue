@@ -2,7 +2,7 @@
 <div class="usuario-detalhe">
     <h3>Detalhes do candidato</h3>
     <p>
-        <strong>Código</strong> {{id}}
+        <strong>Código</strong> {{ uid }}
     </p>
     <!-- <router-link tag="button" primario :to="`/usuario/${id}/editar`">Editar</router-link> -->
 
@@ -11,7 +11,17 @@
 
 <script>
 export default {
-    props: ['id']
+    data() {
+        return {
+            uid: '',
+            usuario: {
+
+            }
+        }
+    },
+    created() {
+        this.uid = this.$route.params.uid
+    }
 }
 </script>
 

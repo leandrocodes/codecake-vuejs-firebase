@@ -68,14 +68,12 @@ const router = new Router({
       name: 'listCandidato',
       component: ListCandidatos,
       // meta: { requiresAuth: true },
-      children: [
-        {
-          path: ':id',
-          component: CandidatoDetalhe,
-          props: true,
-          name: 'candidatoDetalhe'
-        }
-      ]
+    },
+    {
+      path: '/candidatoDetalhe',
+      name: 'candidatoDetalhe',
+      component: CandidatoDetalhe,
+      // meta: { requiresAuth: true },
     },
 
     {
