@@ -91,7 +91,8 @@ export default {
         email: '',
         telefone: '',
         experiencias: '',
-        nascimento: ''
+        nascimento: '',
+        url: ''
       },
       alert: false,
       progressUpload: 0,
@@ -107,7 +108,7 @@ export default {
       })
     },
     upload(file) {
-      this.uploadTask = this.$firebase.storage().ref(`${this.candidato.cpf}pic`).put(file);
+      this.uploadTask = this.$firebase.storage().ref(`${this.candidato.cpf}`).put(file);
     },
     enviarCurriculo() {
       this.axios.post(`/candidatos.json`, this.candidato).then(() => {
@@ -120,10 +121,10 @@ export default {
       this.uploadTask.on('state_changed', sp => {
         this.progressUpload = Math.floor(sp.bytesTransferred / sp.totalBytes * 100)
       },
+      null,
         () => {
           this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-            this.$emit('url', downloadURL)
-            console.log(downloadURL)
+            this.candidato.url = downloadURL
           })
         })
     }

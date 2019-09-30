@@ -45,6 +45,7 @@ export default {
   created() {
     this.axios.get('users.json').then(res => {
       this.usuarios = res.data
+      console.log(this.$firebase.storage().refFromURL(`gs://${process.env.VUE_APP_STORAGE_BUCKET}/06239470139pic.jpeg`))
     })
   }
 }

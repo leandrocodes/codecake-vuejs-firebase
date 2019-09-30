@@ -28,20 +28,21 @@ export default {
         nome: '',
         sobrenome: '',
         cidade: '',
-        uf: '',
+        cpf: '',
         endereco: { rua: '', bairro: '', numero: '' },
         email: '',
         telefone: '',
         experiencias: '',
-        nascimento: ''
+        nascimento: '',
+        url: ''
       }
     }
   },
   created() {
     this.uid = this.$route.params.uid
     this.axios.get(`candidatos/${this.uid}.json`).then(res => {
-      this.usuario = res.data
-      console.log(this.usuario)
+      this.candidato = res.data
+     console.log(this.candidato)
     })
   }
 }
