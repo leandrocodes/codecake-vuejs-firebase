@@ -1,27 +1,49 @@
 <template>
-<div class="usuario-detalhe">
+  <div class="usuario-detalhe">
     <h3>Detalhes do candidato</h3>
-    <p>
-        <strong>Código</strong> {{ uid }}
-    </p>
-    <!-- <router-link tag="button" primario :to="`/usuario/${id}/editar`">Editar</router-link> -->
 
-</div>
+    <div v-if="!uid">
+      <h4>Nenhum candidato foi selecionado</h4>
+      <router-link to="/listCandidato">
+        <vs-button>Voltar</vs-button>
+      </router-link>
+    </div>
+
+    <div v-else>
+      <p>
+        <strong>Código</strong>
+        {{ uid }}
+      </p>
+    </div>
+    <!-- <router-link tag="button" primario :to="`/usuario/${id}/editar`">Editar</router-link> -->
+  </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            uid: '',
-            usuario: {
-
-            }
-        }
-    },
-    created() {
-        this.uid = this.$route.params.uid
+  data() {
+    return {
+      uid: null,
+      candidato: {
+        nome: '',
+        sobrenome: '',
+        cidade: '',
+        uf: '',
+        endereco: { rua: '', bairro: '', numero: '' },
+        email: '',
+        telefone: '',
+        experiencias: '',
+        nascimento: ''
+      }
     }
+  },
+  created() {
+    this.uid = this.$route.params.uid
+    this.axios.get(`candidatos/${this.uid}.json`).then(res => {
+      this.usuario = res.data
+      console.log(this.usuario)
+    })
+  }
 }
 </script>
 
