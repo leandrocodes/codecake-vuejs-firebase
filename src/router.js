@@ -10,8 +10,10 @@ Vue.use(Router)
 const Login = () => import(/* webpackChunkName: "form" */'./views/Cliente/Login')
 const SignUp = () => import(/* webpackChunkNme "form" */'./views/Cliente/SignUp')
 
-const LoginAdmin = () => import(/* webpackChunkNme "form" */'./views/Admin/Login')
-const HomeAdmin = () => import(/* webpackChunkNme "form" */'./views/Admin/Home')
+const LoginAdmin = () => import(/* webpackChunkNme "admin" */'./views/Admin/Login')
+const HomeAdmin = () => import(/* webpackChunkNme "admin" */'./views/Admin/Home')
+const ListClients = () => import(/* webpackChunkNme "admin" */'./views/Admin/ListClientes.vue')
+const ListCandidatos = () => import(/* webpackChunkNme "admin" */'./views/Admin/ListCandidatos.vue')
 
 const EditForm = () => import('./views/Cliente/EditForm')
 
@@ -52,6 +54,18 @@ const router = new Router({
       path: '/homeAdmin',
       name: 'homeAdmin',
       component: HomeAdmin,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/listClients',
+      name: 'listClients',
+      component: ListClients,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/listCandidatos',
+      name: 'listCandidatos',
+      component: ListCandidatos,
       meta: { requiresAuth: true }
     },
     {

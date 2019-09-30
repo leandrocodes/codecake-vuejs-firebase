@@ -49,7 +49,6 @@
 
       <vs-row vs-type="flex" vs-jusitfy="center" vs-align="center" vs-w="12">
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
-          
           <input
             class="inputfile"
             id="file"
@@ -59,7 +58,9 @@
             @change="detectFiles($event.target.files)"
             value="Escolher uma foto"
           />
-          <label for="file"> <vs-icon icon="camera_alt"></vs-icon> Escolha uma foto...</label>
+          <label for="file">
+            <vs-icon icon="camera_alt"></vs-icon>Escolha uma foto...
+          </label>
           <!-- <div class="progress-bar" :style="{ width: progressUpload + '%'}">{{ progressUpload }}%</div> -->
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
@@ -71,12 +72,6 @@
       <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center">
           <vs-button @click="enviarCurriculo" icon="send" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient" size="small">Enviar</vs-button>
-        </vs-col>
-      </vs-row>
-
-      <vs-row>
-        <vs-col v-if="alert" vs-type="flex" vs-justify="center" vs-align="center">
-          <vs-alert :active.sync="alert" color="success" icon="check_circle" closable>Currículo Enviado com sucesso!</vs-alert>
         </vs-col>
       </vs-row>
     </form>
@@ -116,8 +111,7 @@ export default {
     },
     enviarCurriculo() {
       this.axios.post(`/candidatos.json`, this.candidato).then(() => {
-        // console.log('enviou')
-
+        this.alert = true
       })
     }
   },
@@ -129,6 +123,7 @@ export default {
         () => {
           this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
             this.$emit('url', downloadURL)
+            console.log(downloadURL)
           })
         })
     }
@@ -168,19 +163,25 @@ export default {
   justify-content: space-evenly;
   align-items: center;
   padding: 1em;
-  background-image: linear-gradient(to left bottom, #b39cd0, #a88ccd, #9c7dc9, #906dc6, #845ec2);
-  border-radius: .5em;
+  background-image: linear-gradient(
+    to left bottom,
+    #b39cd0,
+    #a88ccd,
+    #9c7dc9,
+    #906dc6,
+    #845ec2
+  );
+  border-radius: 0.5em;
   color: white;
 }
 
 .inputfile:focus + label,
 .inputfile + label:hover {
   cursor: pointer;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.185)
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.185);
 }
 
-.vs-textarea{
+.vs-textarea {
   height: 200px;
 }
-
 </style>
