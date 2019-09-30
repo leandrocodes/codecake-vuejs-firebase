@@ -14,6 +14,9 @@
         <strong>Código</strong>
         {{ uid }}
       </p>
+
+        <img :src="candidato.url" >
+
     </div>
     <!-- <router-link tag="button" primario :to="`/usuario/${id}/editar`">Editar</router-link> -->
   </div>
