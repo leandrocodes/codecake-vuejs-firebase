@@ -178,4 +178,9 @@ export default {
   cursor: pointer;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.185)
 }
+
+.vs-textarea{
+  height: 200px;
+}
+
 </style>
