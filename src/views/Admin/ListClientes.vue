@@ -4,7 +4,7 @@
 
     <vs-row style="margin: 20px 0;">
       <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
-        <vs-button icon="exit_to_app" @click.prevent="voltar" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">
+        <vs-button icon="arrow_back" @click.prevent="voltar" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">
           Voltar
         </vs-button>
       </vs-col>

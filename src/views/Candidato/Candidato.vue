@@ -43,10 +43,10 @@
 
       <vs-row vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="4">
-          <vs-input v-model="candidato.telefone" color="#b39cd0" label="E-mail: " placeholder="nome@exemplo.com" />
+          <vs-input v-model="candidato.email" color="#b39cd0" label="E-mail: " placeholder="nome@exemplo.com" />
         </vs-col>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="2">
-          <vs-input v-model="candidato.email" color="#b39cd0" label="Telefone:" placeholder="(99)999999999)" />
+          <vs-input v-model="candidato.telefone" color="#b39cd0" label="Telefone:" placeholder="(99)999999999)" />
         </vs-col>
       </vs-row>
 

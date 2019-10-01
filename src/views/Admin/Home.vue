@@ -11,7 +11,7 @@
     <vs-row style="margin: 20px 0;">
       <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
         <router-link to="/listClients">
-          <vs-button icon="exit_to_app" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">Listar Clientes</vs-button>
+          <vs-button icon="format_list_bulleted" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">Listar Clientes</vs-button>
         </router-link>
       </vs-col>
     </vs-row>
@@ -19,7 +19,7 @@
         <vs-row style="margin: 20px 0;">
       <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12" vs-xs="12" vs-xs-offset="0">
         <router-link to="/listCandidato">
-          <vs-button icon="exit_to_app" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">Listar Candidatos</vs-button>
+          <vs-button icon="format_list_bulleted" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">Listar Candidatos</vs-button>
         </router-link>
       </vs-col>
     </vs-row>
