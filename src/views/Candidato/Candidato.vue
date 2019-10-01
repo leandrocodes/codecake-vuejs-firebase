@@ -17,7 +17,6 @@
         </vs-col>
       </vs-row>
 
-
       <vs-row vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="2">
           <vs-input v-model="candidato.cpf" color="#b39cd0" label="CPF: " placeholder="032.123.766-88" />
@@ -29,7 +28,6 @@
           <vs-input v-model="candidato.nascimento" color="#b39cd0" label="Nascimento:" placeholder="31/01/2000" />
         </vs-col>
       </vs-row>
-
 
       <vs-row vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="3">
@@ -43,7 +41,7 @@
         </vs-col>
       </vs-row>
 
-        <vs-row vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
+      <vs-row vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="4">
           <vs-input v-model="candidato.telefone" color="#b39cd0" label="E-mail: " placeholder="nome@exemplo.com" />
         </vs-col>
@@ -52,12 +50,14 @@
         </vs-col>
       </vs-row>
 
-
-    
-
       <vs-row vs-type="flex" vs-jusitfy="center" vs-align="center" vs-w="12">
         <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="12">
-          <vs-textarea counter="1000" color="#b39cd0" label="Experiências profissionais" v-model="candidato.experiencias" />
+          <vs-textarea
+            counter="1000"
+            color="#b39cd0"
+            label="Experiências profissionais"
+            v-model="candidato.experiencias"
+          />
         </vs-col>
       </vs-row>
 
@@ -84,8 +84,21 @@
       </vs-row>
 
       <vs-row>
+        <vs-col type="flex" vs-justify="center" vs-align="center">
+          <div v-if="alert" class="alert">Currículo enviado com sucesso!</div>
+        </vs-col>
+      </vs-row>
+
+      <vs-row>
         <vs-col vs-type="flex" vs-justify="center" vs-align="center">
-          <vs-button @click="enviarCurriculo" icon="send" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient" size="small">Enviar</vs-button>
+          <vs-button
+            @click="enviarCurriculo"
+            icon="send"
+            color="#b39cd0"
+            gradient-color-secondary="#845EC2"
+            type="gradient"
+            size="small"
+          >Enviar</vs-button>
         </vs-col>
       </vs-row>
     </form>
@@ -127,6 +140,18 @@ export default {
     enviarCurriculo() {
       this.axios.post(`/candidatos.json`, this.candidato).then(() => {
         this.alert = true
+        this.candidato.nome = ''
+        this.candidato.sobrenome =''
+        this.candidato.cidade = ''
+        this.candidato.uf = ''
+        this.candidato.endereco.rua = '' 
+        this.candidato.bairro = ''
+        this.candidato.numero = ''
+        this.candidato.email = ''
+        this.candidato.telefone = ''
+        this.candidato.experiencias = ''
+        this.candidato.nascimento = ''
+        this.candidato.url = ''
       })
     }
   },
@@ -135,7 +160,7 @@ export default {
       this.uploadTask.on('state_changed', sp => {
         this.progressUpload = Math.floor(sp.bytesTransferred / sp.totalBytes * 100)
       },
-      null,
+        null,
         () => {
           this.uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
             this.candidato.url = downloadURL
@@ -198,5 +223,9 @@ export default {
 
 .vs-textarea {
   height: 200px;
+}
+
+.alert {
+  text-align: center;
 }
 </style>
