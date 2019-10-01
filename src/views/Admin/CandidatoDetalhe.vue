@@ -15,7 +15,8 @@
         {{ uid }}
       </p>
 
-      <img :src="candidato.url" />
+        <img :src="candidato.url" >
+
     </div>
     <!-- <router-link tag="button" primario :to="`/usuario/${id}/editar`">Editar</router-link> -->
   </div>
@@ -44,7 +45,7 @@ export default {
     this.uid = this.$route.params.uid
     this.axios.get(`candidatos/${this.uid}.json`).then(res => {
       this.candidato = res.data
-      console.log(this.candidato)
+     console.log(this.candidato)
     })
   }
 }
