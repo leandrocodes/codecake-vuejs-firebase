@@ -11,7 +11,7 @@
     <vs-list v-for="(candidato, uid) in candidatos" :key="uid">
       <vs-list-header icon="supervisor_account" :title="candidato.nome"></vs-list-header>
       <vs-list-item title="CPF: " :subtitle="candidato.cpf"></vs-list-item>
-      <vs-list-item title="Email: " :subtitle="candidato.cpf"></vs-list-item>
+      <vs-list-item title="Email: " :subtitle="candidato.email"></vs-list-item>
       <vs-list-item title="Telefone: " :subtitle="candidato.endereco.rua"></vs-list-item>
       <vs-list-item><vs-button icon="arrow_forward" @click.prevent="detalhes(uid)" color="#b39cd0" gradient-color-secondary="#845EC2" type="gradient">Detalhes</vs-button></vs-list-item>
       <br />
