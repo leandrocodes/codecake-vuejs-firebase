@@ -25,7 +25,7 @@
     "@vue/cli-service": "^3.11.0",
     "deepmerge": "^4.0.0",
     "fibers": "^4.0.1",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.13.1",
     "sass": "^1.22.10",
     "sass-loader": "^7.3.1",
     "vue-cli-plugin-vuesax": "^1.0.0",
