@@ -21,16 +21,16 @@
   },
   "devDependencies": {
     "@mdi/font": "^4.2.95",
-    "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
     "deepmerge": "^4.0.0",
     "fibers": "^4.0.1",
     "node-sass": "^4.13.1",
     "sass": "^1.22.10",
-    "sass-loader": "^7.3.1",
+    "sass-loader": "^13.2.0",
     "vue-cli-plugin-vuesax": "^1.0.0",
     "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.2.2"
+    "vuetify-loader": "^1.9.2"
   },
   "postcss": {
     "plugins": {
